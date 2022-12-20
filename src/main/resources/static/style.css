@@ -41,15 +41,9 @@ body {
 }
 
 .active-user1 {
-
-}
-
-.active-user2 {
-
-}
-
-.data {
-    alignment: initial;
+    padding: 0;
+    text-align: left;
+    border: 1px solid black;
 }
 
 
