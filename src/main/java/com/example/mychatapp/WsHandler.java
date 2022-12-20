@@ -1,14 +1,16 @@
 package com.example.mychatapp;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.web.socket.*;
 
+@Log4j2
 public class WsHandler implements WebSocketHandler {
 
 
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        System.out.println(session.getId());
+        log.info("welcome " + session.getId());
     }
 
     @Override
@@ -23,7 +25,6 @@ public class WsHandler implements WebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-
     }
 
     @Override
