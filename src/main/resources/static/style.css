@@ -12,7 +12,7 @@ body {
     color: black;
 }
 
-.container1 {
+.submit {
     margin: 0 auto;
     width: 150px;
     background: black;
@@ -20,7 +20,7 @@ body {
     border-radius: 6px;
 }
 
-.container2 {
+.reset {
     margin: 0 auto;
     width: 150px;
     background: black;
@@ -28,13 +28,13 @@ body {
     border-radius: 6px;
 }
 
-.username1 {
+.username {
     border-radius: 6px;
     padding-left: 3.8rem;
     width: 200px;
 }
 
-.username2 {
+.password {
     border-radius: 6px;
     padding-left: 3.8rem;
     width: 200px;

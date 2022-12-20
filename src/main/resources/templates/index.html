@@ -16,10 +16,10 @@
 <body>
 <h1>Enter In Chat</h1>
 <form action="#" th:action="@{/registration}" th:object="${registration}" method="post">
-    <p>Username: <input class="username1" type="text" th:field="*{username}"  placeholder="Username"/></p>
-    <p>Password: <input class="username2" type="password" th:field="*{password}" placeholder="Password"/></p>
-    <p><input class="container1" th:onclick="connect(${username})" type="submit" value="Submit" />
-        <input class="container2" type="reset" value="Reset" /></p>
+    <p>Username: <input class="username" type="text" th:field="*{username}"  placeholder="Username"/></p>
+    <p>Password: <input class="password" type="password" th:field="*{password}" placeholder="Password"/></p>
+    <p><input class="submit" th:onclick="connect(${username})" type="submit" value="Submit" />
+        <input class="reset" type="reset" value="Reset" /></p>
 </form>
 </body>
 </html>
