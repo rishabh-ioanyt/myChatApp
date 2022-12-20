@@ -5,9 +5,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
           type="text/css">
     <link th:href="@{/style.css}" rel="stylesheet">
-    <title>Title</title>
+    <script type="text/javascript" th:src="@{/chat.js}"></script>
+    <title>Chat</title>
 </head>
 <body>
-
+<p>chat With </p> <p th:text="${username}"></p>
+<a th:href="@{/disconnect}"><input type="button" value="Disconnect" th:onclick="disconnected()"></a>
 </body>
 </html>

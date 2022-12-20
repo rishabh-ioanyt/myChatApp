@@ -6,17 +6,18 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
         type="text/css">
   <link th:href="@{/style.css}" rel="stylesheet">
+  <script type="text/javascript" th:src="@{/chat.js}"></script>
 </head>
 <body>
 <h1>Active Users</h1>
 <table>
   <tbody>
   <tr th:each="list : ${registrations}">
-    <td><a th:text="${list.username}" th:href="@{/chatWith}"></a></td>
+    <td><a th:text="${list.username}" th:href="@{/chatWith/{username}(username = ${list.username})} "></a></td>
   </tr>
   </tbody>
 </table>
 <a th:href="@{/disconnect}">
-<input type="button" value="Disconnect" th:onclick="disconnect()"></a>
+<input type="button" value="Disconnect" th:onclick="disconnected()"></a>
 </body>
 </html>
