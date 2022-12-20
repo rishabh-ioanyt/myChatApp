@@ -1,18 +1,14 @@
-
-
+let stompClient = null;
+function connect() {
+    const socket = new WebSocket("ws://localhost:8080/ws");
+    stompClient = Stomp.client(socket);
+    stompClient.connect({}, function (frame) {
+    console.log("connected to: " + frame);
+});
+}
 function disconnect() {
-    if (ws != null) {
-        ws.close();
+    if (stompClient !== null) {
+        stompClient.disconnect();
     }
-    setConnected(false);
     console.log("Disconnected");
 }
-
-$(function() {
-    $("#connect").click(function() {
-        connect();
-    });
-    $("#disconnect").click(function() {
-        disconnect();
-    });
-});
