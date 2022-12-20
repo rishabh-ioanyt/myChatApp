@@ -7,14 +7,16 @@
         type="text/css">
   <link th:href="@{/style.css}" rel="stylesheet">
 </head>
-<body class="active-user1">
-<h1 class="active-user2">Active Users</h1>
+<body>
+<h1>Active Users</h1>
 <table>
   <tbody>
   <tr th:each="list : ${registrations}">
-    <td class="data"><span th:text="${list.username}"> </span></td>
+    <td><a th:text="${list.username}" th:href="@{/chatWith}"></a></td>
   </tr>
   </tbody>
 </table>
+<a th:href="@{/disconnect}">
+<input type="button" value="Disconnect" th:onclick="disconnect()"></a>
 </body>
 </html>
