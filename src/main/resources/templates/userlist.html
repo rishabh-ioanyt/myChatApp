@@ -13,11 +13,11 @@
 <table>
   <tbody>
   <tr th:each="list : ${registrations}">
-    <td><a th:text="${list.username}" th:href="@{/chatWith/{username}(username = ${list.username})} "></a></td>
+    <td th:onclick="connectToChat(${list.username})"><a th:text="${list.username}" th:href="@{/chatWith/{username}(username = ${list.username})}"></a></td>
   </tr>
   </tbody>
 </table>
-<a th:href="@{/disconnect}">
+<a th:href="@{/registration}">
 <input type="button" value="Disconnect" th:onclick="disconnected()"></a>
 </body>
 </html>

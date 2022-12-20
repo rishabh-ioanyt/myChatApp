@@ -25,7 +25,7 @@ function connectToChat(userName) {
     stompClient.connect({}, function (frame) {
         console.log("connected to: " + frame);
         stompClient.subscribe("/topic/" + userName, function (response) {
-
+            console.log(userName);
         });
     });
 }

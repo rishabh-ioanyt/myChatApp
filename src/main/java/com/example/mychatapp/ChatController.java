@@ -28,12 +28,6 @@ public class ChatController {
         return "userlist";
     }
 
-    @GetMapping("/disconnect")
-    public String disconnect(Model model){
-        model.addAttribute("registration",new Registration());
-        return "index";
-    }
-
     @GetMapping("/chatWith/{username}")
     public String chatWith(Model model, @PathVariable String username){
         model.addAttribute("username", username);
