@@ -12,9 +12,11 @@
 <table>
   <tbody>
   <tr th:each="list : ${registrations}">
-    <td><span th:text="${list.username}"> </span></td>
+    <td><a th:text="${list.username}" th:href="@{/chatWith}"></a></td>
   </tr>
   </tbody>
 </table>
+<a th:href="@{/disconnect}">
+<input type="button" value="Disconnect" th:onclick="disconnect()"></a>
 </body>
 </html>
