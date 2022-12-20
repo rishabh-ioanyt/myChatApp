@@ -7,12 +7,12 @@
         type="text/css">
   <link th:href="@{/style.css}" rel="stylesheet">
 </head>
-<body>
-<h1>Active Users</h1>
+<body class="active-user1">
+<h1 class="active-user2">Active Users</h1>
 <table>
   <tbody>
   <tr th:each="list : ${registrations}">
-    <td><span th:text="${list.username}"> </span></td>
+    <td class="data"><span th:text="${list.username}"> </span></td>
   </tr>
   </tbody>
 </table>

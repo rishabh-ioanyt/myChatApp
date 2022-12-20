@@ -29,12 +29,36 @@ body {
 }
 
 .username1 {
-    border-radius: 10px;
+    border-radius: 6px;
+    padding-left: 3.8rem;
+    width: 200px;
 }
 
 .username2 {
-    border-radius: 10px;
+    border-radius: 6px;
+    padding-left: 3.8rem;
+    width: 200px;
 }
+
+.active-user1 {
+
+}
+
+.active-user2 {
+
+}
+
+.data {
+    alignment: initial;
+}
+
+
+
+
+
+
+
+
 
 /*.people-list {*/
 /*    width: 260px;*/
