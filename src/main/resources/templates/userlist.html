@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>List of All Users</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Active Users</h1>
+<table>
+  <tbody>
+  <tr th:each="list : ${registrations}">
+    <td><span th:text="${list.username}"> </span></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
