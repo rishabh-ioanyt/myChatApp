@@ -11,5 +11,4 @@ public class Registration {
 
     private String password;
 
-    private  String confirmPassword;
 }

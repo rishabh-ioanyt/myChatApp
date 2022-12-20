@@ -3,19 +3,9 @@
 <head>
     <title>Getting Started: Handling Form Submission</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
-    <script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
-    <script>
-        let stompClient = null;
-        function connect() {
-            let socket = new WebSocket('/stomp');
-            stompClient = Stomp.over(socket);
-            stompClient.connect({}, function (frame) {
-                console.log(frame)
-            });
-        }
-      </script>
+    <script src="/webjars/jquery/jquery.min.js}"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js}"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js}"></script>
 </head>
 <body>
 <h1>Enter In Chat</h1>
