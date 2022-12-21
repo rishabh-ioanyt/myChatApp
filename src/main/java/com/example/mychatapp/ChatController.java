@@ -2,18 +2,17 @@ package com.example.mychatapp;
 
 import com.example.mychatapp.auth.UserRegistration;
 import com.example.mychatapp.message.MessageModel;
+import com.example.mychatapp.message.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping
 public class ChatController {
 
     @Autowired
@@ -26,13 +25,12 @@ public class ChatController {
 
     @GetMapping("/")
     public String indexPage(Model model){
-        model.addAttribute("registration",new UserRegistration());
+        model.addAttribute("userDto", new UserDto());
         return "index";
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute UserRegistration userRegistration, Model model){
-        chatService.userRegistrationList.add(userRegistration);
+    public String registration(@ModelAttribute UserDto userRegistration, Model model){
         model.addAttribute("registration", userRegistration);
         model.addAttribute("registrations", chatService.getRegistrationList());
         return "userlist";

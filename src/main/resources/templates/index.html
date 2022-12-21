@@ -14,7 +14,7 @@
 </head>
 <body>
 <h1>Enter In Chat</h1>
-<form action="#" th:action="@{/userRegistration}" th:object="${userRegistration}" method="post">
+<form action="#" th:action="@{/registration}" th:object="${userDto}" method="post">
     <p>Username: <input class="username" type="text" th:field="*{username}"  placeholder="Username" /></p>
     <p>Password: <input class="password" type="password" th:field="*{password}" placeholder="Password"/></p>
     <p><input class="submit" type="submit" value="Submit" /><input class="reset" type="reset" value="Reset" /></p>
