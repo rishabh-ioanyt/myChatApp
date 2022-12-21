@@ -31,12 +31,14 @@ public class ChatController {
     @PostMapping("/registration")
     public String registration(@ModelAttribute Registration registration, Model model){
         chatService.registrationList.add(registration);
-        model.addAttribute("registrations", chatService.getRegistrationList(registration));
+        model.addAttribute("registration",registration);
+        model.addAttribute("registrations", chatService.getRegistrationList());
         return "userlist";
     }
 
-    @GetMapping("/chatWith/{username}")
-    public String chatWith(Model model, @PathVariable String username){
+    @GetMapping("/chatWith/{username}/{currentUser}")
+    public String chatWith(Model model, @PathVariable String username, @PathVariable String currentUser){
+        model.addAttribute("currentUser",currentUser);
         model.addAttribute("username", username);
         return "chat";
     }
@@ -44,7 +46,7 @@ public class ChatController {
     @MessageMapping("/stomp/{to}")
     public void sendMessage(@DestinationVariable String to, MessageModel message) {
         System.out.println("handling send message: " + message + " to: " + to);
-            simpMessagingTemplate.convertAndSend("/topic/" + to, message);
+            simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
 
     }
 

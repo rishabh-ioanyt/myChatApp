@@ -1,17 +1,16 @@
-'use strict'
 let stompClient;
-let currentUser= null;
-const socket = new SockJS("/stomp");
 
 
 function connect() {
-    currentUser = document.querySelector('input').value;
+    let socket= new SockJS("/stomp");
     stompClient = Stomp.over(socket);
+    let currentUser = document.getElementById("currentUser");
+    connectToChat();
     stompClient.connect({}, function (frame) {
-        stompClient.subscribe("/topic/" + currentUser, function (response) {
-            console.log(response);
+        stompClient.subscribe("/topic/messages/" + currentUser.innerText, function (response) {
+            let data = JSON.parse(response.body);
+            console.log(data.message + " " + currentUser);
         });
-        console.log(frame);
 });
 }
 function disconnected() {
@@ -21,22 +20,24 @@ function disconnected() {
     console.log("Disconnected");
 }
 
-function connectToChat(userName) {
+function connectToChat() {
     console.log("connecting to chat...")
-    stompClient = Stomp.over("/stomp");
+    var userName = document.getElementById("username");
     stompClient.connect({}, function (frame) {
         console.log("connected to: " + frame);
-        stompClient.subscribe("/topic/" + userName, function (response) {
-            console.log(response);
+        stompClient.subscribe("/topic/messages/" + userName.innerText, function (response) {
+            console.log(response.body);
         });
     });
 }
 
 function sendMsg() {
-    let to = document.querySelector('p').value;
-    let text = document.querySelector('input').value;
-    stompClient.send("/app/stomp/" + to, {}, JSON.stringify({
-        fromLogin: currentUser,
+    var to = document.getElementById("username");
+    var text = document.getElementById("msg");
+    var currentUser = document.getElementById("currentUser");
+    stompClient.send("/app/stomp/" + to.innerText, {}, JSON.stringify({
+        fromLogin: currentUser.innerText,
         message: text
     }));
+    console.log(text.innerText + currentUser.innerText );
 }

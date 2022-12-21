@@ -5,7 +5,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
           type="text/css">
@@ -14,11 +14,11 @@
     <title>Chat</title>
 </head>
 <body>
-<p th:text="${username}"></p>
-<input type="text" >
+<h1 id="currentUser" th:text="${currentUser}"> </h1>
+<p id="username" th:text="${username}"></p>
+<input type="button" th:onclick="connect()" th:value="connect">
+<input id="msg" type="text" placeholder="enter message">
 <input type="button" th:onclick="sendMsg()" value="submit">
-
-
 <a th:href="@{/}"><input type="button" value="Disconnect" th:onclick="disconnected()"></a>
 </body>
 </html>
