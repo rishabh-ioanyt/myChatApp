@@ -1,10 +1,12 @@
-let stompClient = null;
+'use strict'
+let stompClient;
 let currentUser= null;
+const socket = new SockJS("/stomp");
 
-function connect(user) {
-    currentUser = user;
-    const socket = new WebSocket("ws://localhost:8080/ws");
-    stompClient = Stomp.client(socket);
+
+function connect() {
+    currentUser = document.querySelector('input').value;
+    stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         stompClient.subscribe("/topic/" + currentUser, function (response) {
             console.log(response);
@@ -25,7 +27,16 @@ function connectToChat(userName) {
     stompClient.connect({}, function (frame) {
         console.log("connected to: " + frame);
         stompClient.subscribe("/topic/" + userName, function (response) {
-            console.log(userName);
+            console.log(response);
         });
     });
+}
+
+function sendMsg() {
+    let to = document.querySelector('p').value;
+    let text = document.querySelector('input').value;
+    stompClient.send("/app/stomp/" + to, {}, JSON.stringify({
+        fromLogin: currentUser,
+        message: text
+    }));
 }

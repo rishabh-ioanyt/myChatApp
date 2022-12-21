@@ -2,6 +2,11 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
   <title>List of All Users</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
         type="text/css">
@@ -13,11 +18,11 @@
 <table>
   <tbody>
   <tr th:each="list : ${registrations}">
-    <td th:onclick="connectToChat(${list.username})"><a th:text="${list.username}" th:href="@{/chatWith/{username}(username = ${list.username})}"></a></td>
+    <td th:onclick="connectToChat(${list})"><a th:text="${list}" th:href="@{/chatWith/{username}(username = ${list})}"></a></td>
   </tr>
   </tbody>
 </table>
-<a th:href="@{/registration}">
+<a th:href="@{/}">
 <input type="button" value="Disconnect" th:onclick="disconnected()"></a>
 </body>
 </html>
