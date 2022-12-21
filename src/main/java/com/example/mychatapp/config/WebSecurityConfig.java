@@ -53,7 +53,7 @@ public class WebSecurityConfig  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.GET,"/", "registration").permitAll()
+                .requestMatchers(HttpMethod.GET,"/", "registration", "/css/style.css").permitAll()
                 .anyRequest().authenticated().and().formLogin().disable();
         return http.build();
     }
