@@ -14,12 +14,12 @@
   <script type="text/javascript" th:src="@{/chat.js}"></script>
 </head>
 <body class="active-user1">
-<h1 th:text="Welcome  + ${registration.username}"> </h1>
+<h1 th:text="Welcome  + ${userRegistration.username}"> </h1>
 <h3>Active Users</h3>
 <table>
   <tbody>
   <tr th:each="list : ${registrations}">
-    <td><a th:text="${list}" th:href="@{/chatWith/{username}/{currentUser} (currentUser = ${registration.username},username = ${list})}"></a></td>
+    <td><a th:text="${list}" th:href="@{/chatWith/{username}/{currentUser} (currentUser = ${userRegistration.username},username = ${list})}"></a></td>
   </tr>
   </tbody>
 </table>

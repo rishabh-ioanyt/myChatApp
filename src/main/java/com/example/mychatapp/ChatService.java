@@ -1,5 +1,6 @@
 package com.example.mychatapp;
 
+import com.example.mychatapp.auth.UserRegistration;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,9 +10,9 @@ import java.util.stream.Collectors;
 @Service
 public class ChatService {
 
-    List<Registration> registrationList = new ArrayList<>();
+    List<UserRegistration> userRegistrationList = new ArrayList<>();
 
     public List<String> getRegistrationList(){
-        return registrationList.stream().map(Registration::getUsername).collect(Collectors.toList());
+        return userRegistrationList.stream().map(UserRegistration::getUsername).collect(Collectors.toList());
     }
 }

@@ -1,5 +1,7 @@
 package com.example.mychatapp;
 
+import com.example.mychatapp.auth.UserRegistration;
+import com.example.mychatapp.message.MessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -24,14 +26,14 @@ public class ChatController {
 
     @GetMapping("/")
     public String indexPage(Model model){
-        model.addAttribute("registration",new Registration());
+        model.addAttribute("registration",new UserRegistration());
         return "index";
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute Registration registration, Model model){
-        chatService.registrationList.add(registration);
-        model.addAttribute("registration",registration);
+    public String registration(@ModelAttribute UserRegistration userRegistration, Model model){
+        chatService.userRegistrationList.add(userRegistration);
+        model.addAttribute("registration", userRegistration);
         model.addAttribute("registrations", chatService.getRegistrationList());
         return "userlist";
     }
