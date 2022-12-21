@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class ChatController {
 
-    @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
 
-    @Autowired
     ChatService chatService;
 
-
+    @Autowired
+    public ChatController(SimpMessagingTemplate simpMessagingTemplate, ChatService chatService) {
+        this.simpMessagingTemplate = simpMessagingTemplate;
+        this.chatService = chatService;
+    }
 
     @GetMapping("/")
     public String indexPage(Model model){
