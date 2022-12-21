@@ -25,24 +25,11 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    @GetMapping("/")
-    public String indexPage(Model model){
-        model.addAttribute("userDto", new UserDto());
-        return "index";
-    }
-
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute UserDto userRegistration, Model model){
-        model.addAttribute("registration", userRegistration);
-        model.addAttribute("registrations", chatService.getRegistrationList());
-        return "userlist";
-    }
 
     @GetMapping("/chatWith/{username}/{currentUser}")
-    public String chatWith(Model model, @PathVariable String username, @PathVariable String currentUser){
+    public void chatWith(Model model, @PathVariable String username, @PathVariable String currentUser){
         model.addAttribute("currentUser",currentUser);
         model.addAttribute("username", username);
-        return "chat";
     }
 
     @MessageMapping("/stomp/{to}")

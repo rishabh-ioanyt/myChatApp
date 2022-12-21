@@ -9,13 +9,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
           type="text/css">
-    <link th:href="@{/style.css}" rel="stylesheet">
+    <link th:href="@{/static/style.css}" rel="stylesheet">
     <script type="text/javascript" th:src="@{/chat.js}"></script>
     <title>Chat</title>
 </head>
 <body>
-<h1 id="currentUser" th:text="${currentUser}"> </h1>
-<p id="username" th:text="${username}"></p>
+<div><h1 th:text="Welcome  + ${userDto.username}"> </h1>
+    <h3>Active Users</h3>
+    <table>
+        <tbody>
+        <tr th:each="list : ${getAllUsers}">
+            <td><a th:text="${list}" th:href="@{/chatWith/{username}/{currentUser} (currentUser = ${userRegistration.username},username = ${list})}"></a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/}"><input type="button" value="Disconnect"></a>
+</div>
+<h3 id="currentUser" th:text="${userDto.username}"> </h3>
+<p id="username" th:text="${list}"></p>
 <input type="button" th:onclick="connect()" th:value="connect">
 <input id="msg" type="text" placeholder="enter message">
 <input type="button" th:onclick="sendMsg()" value="submit">
