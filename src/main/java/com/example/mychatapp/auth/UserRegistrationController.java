@@ -26,9 +26,13 @@ public class UserRegistrationController {
     }
 
     @PostMapping("/login")
-    public String registration(@ModelAttribute UserDto userDto, Model model){
-        model.addAttribute("userDto", userDto);
-        model.addAttribute("getAllUsers", userRegistrationService.getAllUsers());
-        return "chat";
+    public String registration(@ModelAttribute UserDto userDto, Model model) throws Exception {
+        if (userRegistrationService.loginUser(userDto).equals("Logged Successfully")){
+            model.addAttribute("getAllUsers", userRegistrationService.getAllUsers());
+            model.addAttribute("userDto", userDto);
+            return "chat";
+        }else {
+            return "index";
+        }
     }
 }

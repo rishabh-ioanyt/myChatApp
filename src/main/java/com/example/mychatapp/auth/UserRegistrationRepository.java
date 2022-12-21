@@ -8,4 +8,8 @@ public interface UserRegistrationRepository extends JpaRepository<UserRegistrati
 
     UserRegistration findByUsername(String username);
 
+    boolean existsByUsername(String username);
+
+
+
 }

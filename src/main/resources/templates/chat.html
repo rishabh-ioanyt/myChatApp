@@ -19,7 +19,7 @@
     <table>
         <tbody>
         <tr th:each="list : ${getAllUsers}">
-            <td><a th:text="${list}" th:href="@{/chatWith/{username}/{currentUser} (currentUser = ${userRegistration.username},username = ${list})}"></a></td>
+            <td><a th:text="${list}" th:href="@{/chatWith/{username}/{currentUser} (currentUser = ${userDto.username},username = ${list})}"></a></td>
         </tr>
         </tbody>
     </table>
