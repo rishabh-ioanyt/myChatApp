@@ -7,9 +7,19 @@
 body {
     background: linear-gradient(to top right, #0033cc 0%, #ff9999 100%);
     font: 20px/20px "Inter", padmaa-Bold;
-    padding: 300px 0;
     text-align: center;
     color: black;
+    height: 100vh;
+}
+
+.div {
+    border: 3px solid green;
+    padding: 10px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .submit {
