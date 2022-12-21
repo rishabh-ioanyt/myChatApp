@@ -43,6 +43,11 @@ public class BootStrap implements ApplicationListener<ApplicationReadyEvent> {
             thirdUser.setUsername("ioanyt");
             thirdUser.setPassword(passwordEncoder.encode("ioanyt"));
             registrationRepository.save(thirdUser);
+
+            UserRegistration adminUser = new UserRegistration();
+            adminUser.setUsername("admin");
+            adminUser.setPassword(passwordEncoder.encode("admin"));
+            registrationRepository.save(adminUser);
         }
     }
 }

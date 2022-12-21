@@ -25,7 +25,7 @@ public class UserRegistrationController {
         return "index";
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/login")
     public String registration(@ModelAttribute UserDto userDto, Model model){
         model.addAttribute("userDto", userDto);
         model.addAttribute("getAllUsers", userRegistrationService.getAllUsers());
