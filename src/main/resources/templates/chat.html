@@ -23,9 +23,15 @@
     <h3>Active Users</h3>
     <table>
         <tbody>
-        <tr th:each="list : ${getAllUsers}">
-            <td><a th:text="${list}" th:href="@{/chatWith/{username}/{currentUser} (currentUser = ${userDto},username = ${list})}"></a></td>
-        </tr>
+        <div th:each="list : ${getAllUsers}">
+            <div>
+                <input type="radio" id="${list}" value="name">
+                <label for="${list}" th:text="${list}"></label>
+            </div>
+        </div>
+<!--        <tr th:each="list : ${getAllUsers}">-->
+<!--            <td><a th:text="${list}" th:href="@{/chatWith/{username}/{currentUser} (currentUser = ${userDto},username = ${list})}"></a></td>-->
+<!--        </tr>-->
         </tbody>
     </table>
     <a th:href="@{/}"><input type="button" value="Disconnect"></a>
