@@ -34,13 +34,12 @@
 <!--        </tr>-->
         </tbody>
     </table>
-    <a th:href="@{/}"><input type="button" value="Disconnect"></a>
 </div>
 <h3 id="currentUser" th:text="${userDto}"> </h3>
-<p id="username" th:text="${list}"></p>
 <input type="button" th:onclick="connect()" th:value="connect">
 <input id="msg" type="text" placeholder="enter message">
+<input id="sendto" type="text" placeholder="sendto">
 <input type="button" th:onclick="sendMsg()" value="submit">
-<a th:href="@{/}"><input type="button" value="Disconnect" th:onclick="disconnected()"></a>
+<input type="button" value="Disconnect" th:onclick="disconnected()">
 </body>
 </html>

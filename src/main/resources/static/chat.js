@@ -20,24 +20,25 @@ function disconnected() {
     console.log("Disconnected");
 }
 
-function connectToChat() {
+function connectToChat( username) {
     console.log("connecting to chat...")
-    var userName = document.getElementById("username");
     stompClient.connect({}, function (frame) {
         console.log("connected to: " + frame);
-        stompClient.subscribe("/topic/messages/" + userName.innerText, function (response) {
+        stompClient.subscribe("/topic/messages/" + userName, function (response) {
             console.log(response.body);
         });
     });
 }
 
 function sendMsg() {
-    var to = document.getElementById("username");
+    var to = document.getElementById("sendto");
     var text = document.getElementById("msg");
     var currentUser = document.getElementById("currentUser");
-    stompClient.send("/app/stomp/" + to.innerText, {}, JSON.stringify({
+    console.log(to.value);
+    console.log(text.value);
+    console.log(currentUser.innerText);
+    stompClient.send("/app/stomp/" + to.value, {}, JSON.stringify({
         fromLogin: currentUser.innerText,
-        message: text
+        message: text.value
     }));
-    console.log(text.innerText + currentUser.innerText );
 }
