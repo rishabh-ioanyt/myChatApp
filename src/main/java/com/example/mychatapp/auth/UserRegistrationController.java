@@ -1,6 +1,8 @@
 package com.example.mychatapp.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +19,26 @@ public class UserRegistrationController {
         this.userRegistrationService = userRegistrationService;
     }
 
+    @RequestMapping("/")
+    public String defaultPage(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "/index";
+        }
+        model.addAttribute("getAllUsers", userRegistrationService.getAllUsers());
+        model.addAttribute("userDto", SecurityContextHolder.getContext().getAuthentication().getName());
+        return "/chat";
+    }
+
     @RequestMapping("/index")
-    public String indexPage(){
-        //model.addAttribute("userDto", new UserDto());
-        return "/index";
+    public String indexPage(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "/index";
+        }
+        model.addAttribute("getAllUsers", userRegistrationService.getAllUsers());
+        model.addAttribute("userDto", SecurityContextHolder.getContext().getAuthentication().getName());
+        return "/chat";
     }
 
     @RequestMapping("/chat")

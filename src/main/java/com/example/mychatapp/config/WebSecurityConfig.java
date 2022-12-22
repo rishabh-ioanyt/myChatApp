@@ -58,7 +58,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers( "/", "style.css").permitAll()
+                .requestMatchers( "/", "/css/style.css").permitAll()
                 .anyRequest().authenticated().and().formLogin()
                 .loginPage("/login").permitAll().successForwardUrl("/chat")
                 .and()
