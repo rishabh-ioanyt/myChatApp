@@ -4,7 +4,6 @@ import com.example.mychatapp.auth.UserRegistration;
 import com.example.mychatapp.auth.UserRegistrationRepository;
 import com.example.mychatapp.auth.UserRegistrationService;
 import lombok.NonNull;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;

@@ -1,8 +1,6 @@
 package com.example.mychatapp;
 
-import com.example.mychatapp.auth.UserRegistration;
 import com.example.mychatapp.message.MessageModel;
-import com.example.mychatapp.message.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -15,15 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class ChatController {
 
+    @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
 
-    ChatService chatService;
-
-    @Autowired
-    public ChatController(SimpMessagingTemplate simpMessagingTemplate, ChatService chatService) {
-        this.simpMessagingTemplate = simpMessagingTemplate;
-        this.chatService = chatService;
-    }
 
 
     @GetMapping("/chatWith/{username}/{currentUser}")

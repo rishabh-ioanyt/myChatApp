@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,15 +24,11 @@ public class UserRegistrationService implements UserDetailsService {
 
     DaoAuthenticationProvider daoAuthenticationProvider;
 
-    AuthenticationManager authenticationManager;
-
     @Autowired
     public UserRegistrationService(@Lazy UserRegistrationRepository userRegistrationRepository,
-                                   @Lazy AuthenticationManager authenticationManager,
                                    @Lazy DaoAuthenticationProvider daoAuthenticationProvider) {
         this.userRegistrationRepository = userRegistrationRepository;
         this.daoAuthenticationProvider = daoAuthenticationProvider;
-        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -60,21 +55,16 @@ public class UserRegistrationService implements UserDetailsService {
 
     public String loginUser(UserDto userDto) throws Exception {
         if (userDto.getUsername() != null && userDto.getPassword() != null) {
-            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             if (userRegistrationRepository.existsByUsername(userDto.getUsername())) {
                 UserRegistration registration = userRegistrationRepository.findByUsername(userDto.getUsername());
-                if (bCryptPasswordEncoder.matches(userDto.getPassword(), registration.getPassword())) {
-                    Authentication authentication = daoAuthenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                    return "Logged Successfully";
-                } else {
-                    return "Password not correct";
-                }
+                Authentication authentication = daoAuthenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(registration.getUsername(), userDto.getPassword()));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                return "Logged Successfully";
             }else {
-                return "User Not Found";
+                return "not found";
             }
-        }else {
-            return  "Enter Valid Credentials";
+        } else {
+            return "Enter Valid Credentials";
         }
     }
 }
