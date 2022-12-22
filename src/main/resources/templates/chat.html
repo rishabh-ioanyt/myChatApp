@@ -15,7 +15,11 @@
     <title>Chat</title>
 </head>
 <body>
-<div><h1 th:text="Welcome  + ${userDto.username}"> </h1>
+<div> </h1>
+    <div class="flexbox">
+        <h1 th:text="Welcome"> </h1>
+        <h1 th:text="${userDto.username}"></h1>
+    </div>
     <h3>Active Users</h3>
     <table>
         <tbody>
