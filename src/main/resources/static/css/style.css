@@ -7,11 +7,15 @@
 body {
     background: linear-gradient(to top right, #0033cc 0%, #ff9999 100%);
     font: 20px/20px "Inter", padmaa-Bold;
-    text-align: center;
+    /*text-align: center;*/
     color: black;
     height: 100vh;
 }
-
+.flexbox
+{
+    display: flex;
+    gap:10px;
+}
 .div {
     border: 3px solid green;
     padding: 10px;
