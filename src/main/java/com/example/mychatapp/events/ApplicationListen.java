@@ -1,4 +1,4 @@
-package com.example.mychatapp;
+package com.example.mychatapp.events;
 
 import com.example.mychatapp.auth.UserRegistration;
 import com.example.mychatapp.auth.UserRegistrationRepository;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class BootStrap implements ApplicationListener<ApplicationReadyEvent> {
+public class ApplicationListen implements ApplicationListener<ApplicationReadyEvent> {
 
     UserRegistrationRepository registrationRepository;
 
     UserRegistrationService userRegistrationService;
 
     @Autowired
-    public BootStrap(UserRegistrationRepository registrationRepository, UserRegistrationService userRegistrationService) {
+    public ApplicationListen(UserRegistrationRepository registrationRepository, UserRegistrationService userRegistrationService) {
         this.registrationRepository = registrationRepository;
         this.userRegistrationService = userRegistrationService;
     }
