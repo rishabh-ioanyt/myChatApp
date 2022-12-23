@@ -15,7 +15,7 @@
     <title>Chat</title>
 </head>
 <body>
-<div> </h1>
+<div>
     <div class="flexbox">
         <h1 th:text="Welcome"> </h1>
         <h1 id="currentUser" th:text="${userDto}"></h1>
@@ -24,8 +24,8 @@
     <table>
         <tbody>
         <div th:each="list : ${getAllUsers}">
-            <div id="sendto">
-                <input type="radio" th:value="${list}" th:name="HTML" th:text="${list}" th:onclick="connect()">
+            <div>
+                <input type="radio" th:value="${list}" th:name="sendto" th:text="${list}" th:onclick="connect()">
 <!--                <label  th:text="${list}"></label>-->
             </div>
         </div>

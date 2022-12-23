@@ -37,7 +37,8 @@ public class UserRegistrationService implements UserDetailsService {
     }
 
     public List<String> getAllUsers() {
-        return userRegistrationRepository.findAll().stream().map(UserRegistration::getUsername).collect(Collectors.toList());
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRegistrationRepository.findAll().stream().filter(userRegistration -> !userRegistration.getUsername().equals(name)).map(UserRegistration::getUsername).collect(Collectors.toList());
     }
 
     public UserRegistration addUser(UserDto userDto) throws Exception {

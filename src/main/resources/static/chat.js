@@ -43,13 +43,14 @@ function connectToChat( username) {
 }
 
 function sendMsg() {
-    var to = document.getElementById("sendto");
+    // var to = document.getElementsByName("sendto");
+    var to = document.querySelector( 'input[name="sendto"]:checked');
     var text = document.getElementById("msg");
     var currentUser = document.getElementById("currentUser");
-    console.log(to.innerText);
+    console.log(to.value);
     console.log(text.value);
     console.log(currentUser.innerText);
-    stompClient.send("/app/stomp/" + to.innerText, {}, JSON.stringify({
+    stompClient.send("/app/stomp/" + to.value, {}, JSON.stringify({
         fromLogin: currentUser.innerText,
         message: text.value
     }));
