@@ -12,9 +12,9 @@ function connect() {
                 let data = JSON.parse(response.body);
                 $(".output")
                     .append("<span><strong>"
-                        + data.message
-                        + "</strong>: <em> send by "
                         + data.fromLogin
+                        + "</strong>: "
+                        + data.message
                         + "</em></span><br/>");
                 console.log(data.message + " " + currentUser);
             });
@@ -50,6 +50,12 @@ function sendMsg() {
     console.log(to.value);
     console.log(text.value);
     console.log(currentUser.innerText);
+    $(".sendMessage")
+        .append("<span><strong>"
+            + currentUser.innerText
+            + "</strong>: "
+            + text.value
+            + "</em></span><br/>");
     stompClient.send("/app/stomp/" + to.value, {}, JSON.stringify({
         fromLogin: currentUser.innerText,
         message: text.value
