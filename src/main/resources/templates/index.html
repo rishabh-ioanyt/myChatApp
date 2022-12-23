@@ -12,10 +12,11 @@
     <h1>Login</h1>
     <form th:action="@{/login}" method="post">
         <label for="username">Username</label>:
-        <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
+        <input  class="username" type="text" id="username" name="username" autofocus="autofocus" placeholder="Username" /> <br />
         <label for="password">Password</label>:
-        <input type="password" id="password" name="password" /> <br />
-        <input type="submit" value="Log in" /><input class="reset" type="reset" value="Reset" />
+        <input class="password" type="password" id="password" name="password" placeholder="Password" /> <br />
+        <input class="login" type="submit" value="Log in" />
+        <input class="reset" type="reset" value="Reset" />
     </form>
 </div>
 </body>
