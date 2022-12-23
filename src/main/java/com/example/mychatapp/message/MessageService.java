@@ -11,6 +11,7 @@ public class MessageService {
 
     UserRegistrationRepository userRegistrationRepository;
 
+
     @Autowired
     public MessageService(MessageRepository messageRepository, UserRegistrationRepository userRegistrationRepository) {
         this.messageRepository = messageRepository;

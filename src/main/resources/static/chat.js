@@ -9,6 +9,12 @@ function connect() {
     stompClient.connect({}, function (frame) {
         stompClient.subscribe("/topic/messages/" + currentUser.innerText, function (response) {
             let data = JSON.parse(response.body);
+            $(".output")
+                .append("<span><strong>"
+                    + data.message
+                    + "</strong>: <em> send by "
+                    + data.fromLogin
+                    + "</em></span><br/>");
             console.log(data.message + " " + currentUser);
         });
 });
