@@ -18,15 +18,15 @@
 <div> </h1>
     <div class="flexbox">
         <h1 th:text="Welcome"> </h1>
-        <h1 th:text="${userDto}"></h1>
+        <h1 id="currentUser" th:text="${userDto}"></h1>
     </div>
     <h3>Active Users</h3>
     <table>
         <tbody>
         <div th:each="list : ${getAllUsers}">
             <div>
-                <input type="radio" id="${list}" value="name">
-                <label for="${list}" th:text="${list}"></label>
+                <input type="radio" th:name="HTML" th:text="${list}" th:onclick="connect()">
+<!--                <label  th:text="${list}"></label>-->
             </div>
         </div>
 <!--        <tr th:each="list : ${getAllUsers}">-->
@@ -35,8 +35,7 @@
         </tbody>
     </table>
 </div>
-<h3 id="currentUser" th:text="${userDto}"> </h3>
-<input type="button" th:onclick="connect()" th:value="connect">
+<!--<input type="button" th:onclick="connect()" th:value="connect">-->
 <input id="msg" type="text" placeholder="enter message">
 <input id="sendto" type="text" placeholder="sendto">
 <input type="button" th:onclick="sendMsg()" value="submit">
