@@ -7,6 +7,7 @@ function connect() {
         socket= new SockJS("/stomp");
         stompClient = Stomp.over(socket);
         let currentUser = document.getElementById("currentUser");
+        connectEvent();
         stompClient.connect({}, function (frame) {
             stompClient.subscribe("/topic/messages/" + currentUser.innerText, function (response) {
                 let data = JSON.parse(response.body);
@@ -25,6 +26,17 @@ function connect() {
             })
         });
     }
+}
+
+function connectEvent(){
+    var source = new EventSource('/sse');
+    source.addEventListener('spring',function (event) {
+        /*
+                        $(".output").append("<span><strong>" + event.data + "</strong></em></span><br/>");
+        */
+        console.log(event.data);
+    });
+    source.close();
 }
 function disconnected() {
     if (stompClient !== null) {
