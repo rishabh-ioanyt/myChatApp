@@ -25,7 +25,7 @@
         <tbody>
         <div th:each="list : ${getAllUsers}">
             <div>
-                <input type="radio" th:value="${list}" th:name="sendto" th:text="${list}" th:onclick="connect()">
+                <input type="checkbox" th:value="${list}" th:name="sendto" th:text="${list}">
 <!--                <label  th:text="${list}"></label>-->
             </div>
         </div>
@@ -38,7 +38,8 @@
 <!--<input type="button" th:onclick="connect()" th:value="connect">-->
 <input id="msg" type="text" placeholder="enter message">
 <input type="button" th:onclick="sendMsg()" value="submit">
-<input type="button" value="Disconnect" th:onclick="disconnected()">
+<input type="button" th:onclick="broadCastMsg()" value="BroadCast">
+<a th:href="@{/logout}">Logout</a>
 <div class="output"></div>
 <div class="sendMessage"></div>
 </body>

@@ -1,6 +1,7 @@
 let stompClient = null;
 let socket;
 
+window.onload = connect;
 
 function connect() {
     if (stompClient == null) {
@@ -12,13 +13,16 @@ function connect() {
             stompClient.subscribe("/topic/messages/" + currentUser.innerText, function (response) {
                 let data = JSON.parse(response.body);
                 $(".output").append("<span><strong>" + data.fromLogin + "</strong>: " + data.message + "</em></span><br/>");
-                console.log(data.message + " " + currentUser);
             });
 
-            stompClient.subscribe("/user/topic",function (response) {
+            stompClient.subscribe("/user",function (response) {
                 let data = JSON.parse(response.body);
                 console(data.value);
-            })
+            });
+            stompClient.subscribe("/topic/messages", function (response) {
+                let data = JSON.parse(response.body);
+                $(".output").append("<span><strong>" + data.message + "</strong>: " + data.fromLogin + "</em></span><br/>");
+            });
         });
     }
 }
@@ -52,16 +56,28 @@ function sendMsg() {
     var to = document.querySelector( 'input[name="sendto"]:checked');
     var text = document.getElementById("msg");
     var currentUser = document.getElementById("currentUser");
-    console.log(to.value);
-    console.log(text.value);
-    console.log(currentUser.innerText);
-    $(".sendMessage")
+   /* $(".sendMessage")
         .append("<span><strong>"
             + currentUser.innerText
             + "</strong>: "
             + text.value
-            + "</em></span><br/>");
+            + "</em></span><br/>");*/
     stompClient.send("/app/stomp/" + to.value, {}, JSON.stringify({
+        fromLogin: currentUser.innerText,
+        message: text.value
+    }));
+}
+
+function broadCastMsg() {
+    var text = document.getElementById("msg");
+    var currentUser = document.getElementById("currentUser");
+    /* $(".sendMessage")
+         .append("<span><strong>"
+             + currentUser.innerText
+             + "</strong>: "
+             + text.value
+             + "</em></span><br/>");*/
+    stompClient.send("/app/stomp/broadCast", {}, JSON.stringify({
         fromLogin: currentUser.innerText,
         message: text.value
     }));

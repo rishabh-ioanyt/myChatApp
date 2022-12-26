@@ -47,6 +47,11 @@ public class UserRegistrationController {
         model.addAttribute("userDto", SecurityContextHolder.getContext().getAuthentication().getName());
         return "/chat";
     }
+
+    /*@RequestMapping("/logout")
+    public String index(){
+        return "/index";
+    }*/
   /*  @RequestMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);

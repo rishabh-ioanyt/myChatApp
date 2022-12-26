@@ -62,8 +62,8 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated().and().formLogin()
                 .loginPage("/login").permitAll().successForwardUrl("/chat")
                 .and()
-                .logout()
-        .disable();
+                .logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/").invalidateHttpSession(true);
         return http.build();
     }
 
