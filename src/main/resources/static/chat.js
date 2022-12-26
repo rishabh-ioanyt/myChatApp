@@ -11,12 +11,7 @@ function connect() {
         stompClient.connect({}, function (frame) {
             stompClient.subscribe("/topic/messages/" + currentUser.innerText, function (response) {
                 let data = JSON.parse(response.body);
-                $(".output")
-                    .append("<span><strong>"
-                        + data.fromLogin
-                        + "</strong>: "
-                        + data.message
-                        + "</em></span><br/>");
+                $(".output").append("<span><strong>" + data.fromLogin + "</strong>: " + data.message + "</em></span><br/>");
                 console.log(data.message + " " + currentUser);
             });
 
@@ -29,14 +24,12 @@ function connect() {
 }
 
 function connectEvent(){
+    let currentUser = document.getElementById("currentUser");
     var source = new EventSource('/sse');
-    source.addEventListener('spring',function (event) {
-        /*
-                        $(".output").append("<span><strong>" + event.data + "</strong></em></span><br/>");
-        */
+    console.log(source);
+    source.addEventListener(currentUser.innerText,function (event) {
         console.log(event.data);
     });
-    source.close();
 }
 function disconnected() {
     if (stompClient !== null) {

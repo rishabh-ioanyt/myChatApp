@@ -8,6 +8,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.SimpSessionScope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -35,7 +36,6 @@ public class MessageController {
 
     @MessageMapping("/stomp/{to}")
     public void sendMessage(@DestinationVariable String to, MessageModel message) {
-        sendSSE(message.getMessage());
         if (messageService.checkUserOnline(to)) {
             System.out.println("handling send message: " + message + " to: " + to);
             messageService.saveMessage(message.getMessage(), message.getFromLogin(), to);
@@ -44,24 +44,8 @@ public class MessageController {
             bufferMessagesService.saveBufferMessages(message.getMessage(), message.getFromLogin(), to);
         }
     }
-
-    List<SseEmitter> sseEmitterList = new CopyOnWriteArrayList<>();
-
     @RequestMapping("/sse")
     public SseEmitter sse(){
-        SseEmitter sseEmitter = new SseEmitter();
-        sseEmitterList.add(sseEmitter);
-        sseEmitter.onCompletion(() -> sseEmitterList.remove(sseEmitter));
-        return sseEmitter;
-    }
-
-    public void sendSSE(String msg){
-        sseEmitterList.forEach(sseEmitter -> {
-            try {
-                sseEmitter.send(SseEmitter.event().name("spring").data(msg));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        return messageService.addUser();
     }
 }
