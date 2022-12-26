@@ -12,7 +12,8 @@ function connect() {
         stompClient.connect({}, function (frame) {
             stompClient.subscribe("/topic/messages/" + currentUser.innerText, function (response) {
                 let data = JSON.parse(response.body);
-               $(".output").append("<span><strong>" + data.fromLogin + "</strong>: " + data.message + "</em></span><br/>");
+               //$(".output").append("<span><strong>" + data.fromLogin + "</strong>: " + data.message + "</em></span><br/>");
+                $(".output").append("<h5><span class='badge text-bg-dark'><strong>"+data.message+"</strong>  <small>       sent By : "+data.fromLogin+"</small></span></h5>")
             });
 
             stompClient.subscribe("/user",function (response) {
