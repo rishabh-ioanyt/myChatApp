@@ -6,7 +6,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"
           type="text/css">
 <!--    <link th:href="@{/static/css/style.css}" rel="stylesheet">-->
@@ -17,16 +19,15 @@
 <body>
 <div>
     <div class="flexbox">
-        <h1 th:text="Welcome"> </h1>
-        <h1 id="currentUser" th:text="${userDto}"></h1>
+        <h1 align="center" th:text="Welcome"> </h1>
+        <h1 align="center" id="currentUser" th:text="${userDto}"></h1>
     </div>
     <h3>Active Users</h3>
     <table>
         <tbody>
         <div th:each="list : ${getAllUsers}">
-            <div>
-                <input type="checkbox" th:value="${list}" th:name="sendto" th:text="${list}">
-<!--                <label  th:text="${list}"></label>-->
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" th:value="${list}" th:name="sendto" th:text="${list}">
             </div>
         </div>
 <!--        <tr th:each="list : ${getAllUsers}">-->
@@ -34,12 +35,14 @@
 <!--        </tr>-->
         </tbody>
     </table>
-</div>
+</div><br>
 <!--<input type="button" th:onclick="connect()" th:value="connect">-->
-<input id="msg" type="text" placeholder="enter message">
-<input type="button" th:onclick="sendMsg()" value="submit">
-<input type="button" th:onclick="broadCastMsg()" value="BroadCast">
-<a th:href="@{/logout}">Logout</a>
+<div class="form-outline">
+    <textarea class="form-control w-25" id="msg" rows="1" placeholder="message"></textarea>
+</div><br>
+<button type="button" class="btn btn-success" th:onclick="sendMsg()" value="submit" >Send</button>
+<button type="button" th:onclick="broadCastMsg()"class="btn btn-danger">BroadCast</button>
+<a class="btn btn-primary" th:href="@{/logout}" role="button">Logout</a>
 <div class="output"></div>
 <div class="sendMessage"></div>
 </body>

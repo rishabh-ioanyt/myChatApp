@@ -12,7 +12,7 @@ function connect() {
         stompClient.connect({}, function (frame) {
             stompClient.subscribe("/topic/messages/" + currentUser.innerText, function (response) {
                 let data = JSON.parse(response.body);
-                $(".output").append("<span><strong>" + data.fromLogin + "</strong>: " + data.message + "</em></span><br/>");
+               $(".output").append("<span><strong>" + data.fromLogin + "</strong>: " + data.message + "</em></span><br/>");
             });
 
             stompClient.subscribe("/user",function (response) {
@@ -39,16 +39,6 @@ function disconnected() {
     if (stompClient !== null) {
         stompClient.disconnect();
     }
-}
-
-function connectToChat( username) {
-    console.log("connecting to chat...")
-    stompClient.connect({}, function (frame) {
-        console.log("connected to: " + frame);
-        stompClient.subscribe("/topic/messages/" + userName, function (response) {
-            console.log(response.body);
-        });
-    });
 }
 
 function sendMsg() {
@@ -81,4 +71,9 @@ function broadCastMsg() {
         fromLogin: currentUser.innerText,
         message: text.value
     }));
+}
+
+function getList(){
+    var selectedTab = $("#myList").tabs().data("selected.tabs");
+    console.log(selectedTab);
 }
