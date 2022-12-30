@@ -22,6 +22,7 @@
         <h1 align="center" th:text="Welcome"> </h1>
         <h1 align="center" id="currentUser" th:text="${userDto}"></h1>
     </div>
+    <div>
     <h3>Active Users</h3>
     <table>
         <tbody>
@@ -43,6 +44,7 @@
 <button type="button" class="btn btn-success" th:onclick="sendMsg()" value="submit" >Send</button>
 <button type="button" th:onclick="broadCastMsg()"class="btn btn-danger">BroadCast</button>
 <a class="btn btn-primary" th:href="@{/logout}" role="button">Logout</a>
+</div>
 <div class="output"></div>
 <div class="sendMessage"></div>
 </body>

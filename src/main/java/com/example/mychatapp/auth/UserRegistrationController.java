@@ -23,7 +23,7 @@ public class UserRegistrationController {
     public String defaultPage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "/index";
+            return "/signUp";
         }
         model.addAttribute("getAllUsers", userRegistrationService.getAllUsers());
         model.addAttribute("userDto", SecurityContextHolder.getContext().getAuthentication().getName());
@@ -47,6 +47,11 @@ public class UserRegistrationController {
         model.addAttribute("userDto", SecurityContextHolder.getContext().getAuthentication().getName());
         return "/chat";
     }
+
+   /* @RequestMapping("/signUp")
+    public String signUpPage(){
+        return "/signUp";
+    }*/
 
     /*@RequestMapping("/logout")
     public String index(){
