@@ -1,5 +1,6 @@
 package com.example.mychatapp.auth;
 
+import com.example.mychatapp.message.MessageService;
 import com.example.mychatapp.message.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -15,9 +16,12 @@ public class UserRegistrationController {
 
     UserRegistrationService userRegistrationService;
 
+    MessageService messageService;
+
     @Autowired
-    public UserRegistrationController(UserRegistrationService userRegistrationService) {
+    public UserRegistrationController(UserRegistrationService userRegistrationService,MessageService messageService) {
         this.userRegistrationService = userRegistrationService;
+        this.messageService =messageService;
     }
 
     @RequestMapping("/")
@@ -47,6 +51,7 @@ public class UserRegistrationController {
     public String chat(Model model){
         model.addAttribute("getAllUsers", userRegistrationService.getAllUsers());
         model.addAttribute("userDto", SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("onlineUsers", messageService.getAllOnlineUsers());
         return "/chat";
     }
 
