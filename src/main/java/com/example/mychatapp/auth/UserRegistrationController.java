@@ -1,5 +1,6 @@
 package com.example.mychatapp.auth;
 
+import com.example.mychatapp.message.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,7 @@ public class UserRegistrationController {
     public String defaultPage(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            model.addAttribute("UserDto", new UserDto());
             return "/signUp";
         }
         model.addAttribute("getAllUsers", userRegistrationService.getAllUsers());
@@ -48,10 +50,11 @@ public class UserRegistrationController {
         return "/chat";
     }
 
-   /* @RequestMapping("/signUp")
-    public String signUpPage(){
-        return "/signUp";
-    }*/
+    @PostMapping("/signUp")
+    public String signUpPage(Model model,@ModelAttribute UserDto userDto) throws Exception {
+        userRegistrationService.addUser(userDto);
+        return "redirect:/index";
+    }
 
     /*@RequestMapping("/logout")
     public String index(){
