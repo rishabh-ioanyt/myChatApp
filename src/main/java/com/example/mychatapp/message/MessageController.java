@@ -6,8 +6,12 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
+import java.util.List;
 
 @Controller
 public class MessageController {
@@ -44,5 +48,10 @@ public class MessageController {
     @MessageMapping("/stomp/broadCast")
     public void sendMessage(MessageModel message) {
         simpMessagingTemplate.convertAndSend("/topic/messages", message);
+    }
+
+    @MessageMapping("/getMessageBySenderAndReceiver/{sender}/{receiver}")
+    public void getMessageBySenderAndReceiver(@DestinationVariable String sender, @DestinationVariable String receiver){
+        simpMessagingTemplate.convertAndSend("/topic/getMessages/"+sender, messageService.getMessageBySenderAndReceiver(sender,receiver));
     }
 }

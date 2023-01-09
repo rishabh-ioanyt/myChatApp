@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.springframework.web.socket.messaging.DefaultSimpUserRegistry;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,30 +49,34 @@ public class MessageService {
         }
     }
 
-    Map<String, SseEmitter> sseEmitterList = new HashMap<>();
+   List<SseEmitter> sseEmitterList = new ArrayList<>();
 
     public List<String> getAllOnlineUsers(){
         return defaultSimpUserRegistry.getUsers().stream().map(SimpUser::getName).collect(Collectors.toList());
     }
 
-    public void sendSSE(String receivedBy) throws IOException {
+    /*public void sendSSE(String receivedBy) throws IOException {
         System.out.println(receivedBy+"sending sseEmitter");
-        sseEmitterList.get(receivedBy).send(SseEmitter.event().name(receivedBy).data("you get message"));
-       /* sseEmitterList.forEach(sseEmitter -> {
+        sseEmitterList.g(receivedBy).send(SseEmitter.event().name(receivedBy).data("you get message"));
+       *//* sseEmitterList.forEach(sseEmitter -> {
             try {
                 sseEmitter.send(SseEmitter.event().name("spring").data("hello"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });*/
-    }
+        });*//*
+    }*/
 
     public SseEmitter addUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         SseEmitter sseEmitter = new SseEmitter();
-        sseEmitterList.put(authentication.getName(),sseEmitter);
+        sseEmitterList.add(sseEmitter);
         System.out.println("sseEmitter added  with "+authentication.getName());
-        sseEmitter.onCompletion(() -> sseEmitterList.remove(authentication.getName()));
+        sseEmitter.onCompletion(() -> sseEmitterList.remove(sseEmitter));
         return sseEmitter;
+    }
+
+    public List<Messages> getMessageBySenderAndReceiver(String sender, String receiver) {
+       return messageRepository.findAllByReceivedBy_UsernameAndSendBy_Username(receiver, sender);
     }
 }

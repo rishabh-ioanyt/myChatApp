@@ -16,6 +16,16 @@ function connect() {
                 $(".output").append("<h5><span class='badge text-bg-dark'><strong>"+data.message+"</strong>  <small>       sent By : "+data.fromLogin+"</small></span></h5>")
             });
 
+            stompClient.subscribe("/topic/getMessages/" + currentUser.innerText, function (response) {
+                let data = JSON.parse(response.body);
+                //$(".output").append("<span><strong>" + data.fromLogin + "</strong>: " + data.message + "</em></span><br/>");
+                for (let i = 0; i < data.length; i++) {
+                    $(".output").append("<h5><span class='badge text-bg-dark'><strong>"+data[i].message+"</strong>  <small> sent by "+
+                    data[i].receivedBy.username+"</small></span></h5>")
+                }
+                console.log(data);
+            });
+
             stompClient.subscribe("/user",function (response) {
                 let data = JSON.parse(response.body);
                 console(data.value);
@@ -72,6 +82,12 @@ function broadCastMsg() {
         fromLogin: currentUser.innerText,
         message: text.value
     }));
+}
+
+function getMessage(){
+    var to = document.querySelector( 'input[name="sendto"]:checked');
+    var currentUser = document.getElementById("currentUser");
+    stompClient.send("/app/getMessageBySenderAndReceiver/"+ currentUser.innerText+ "/"+ to.value, {},JSON.stringify({}));
 }
 
 function getList(){

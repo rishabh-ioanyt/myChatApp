@@ -39,8 +39,7 @@
                 </li>
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
-                            data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">Active
-                        Users
+                            data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">Active Users
                     </button>
                     <div class="collapse show" id="dashboard-collapse">
                         <ul th:each="onlinelist : ${onlineUsers}"
@@ -48,8 +47,7 @@
                             <!--
                                                 <li th:text="${onlinelist}"><a href="#" class="link-dark d-inline-flex text-decoration-none rounded"></a></li>
                             -->
-                            <input class="form-check-input" type="checkbox" th:value="${onlinelist}" th:name="sendto"
-                                   th:text="${onlinelist}">
+                            <input class="form-check-input" type="checkbox" th:value="${onlinelist}" th:name="sendto" th:onclick="getMessage()" th:text="${onlinelist}">
                         </ul>
                     </div>
                 </li>
